@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #1e3799;
+}
+
+#form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #666;
+}
+
+#form-container select,
+#form-container input[type="text"],
+#form-container input[type="number"] {
+    width: calc(100% - 12px);
+    margin-bottom: 10px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form-container button:hover {
+    background-color: #45a049;
+}
+
+#filtro-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#filtro-container label {
+    font-weight: bold;
+    color: #666;
+}
+
+#filtro-container input[type="text"] {
+    width: calc(100% - 12px);
+    margin-bottom: 10px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#gastos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; /* Centraliza o conteúdo da lista */
+}
+
+#gastos-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#gastos-list li:last-child {
+    border-bottom: none;
+}
+
+#gastos-list button {
+    margin-left: 10px;
+    padding: 6px 10px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#gastos-list button:hover {
+    background-color: #c9302c;
+}
