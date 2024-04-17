@@ -1,44 +1,71 @@
 class Gasto {
-    constructor(categoria, descricao, valor) {
+
+    constructor(categoria, produto, quantidade, valorUnitario) {
+
         this.categoria = categoria;
-        this.descricao = descricao;
-        this.valor = valor;
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.valorUnitario = valorUnitario;
     }
 
+    calcularValorTotal() {
+        return this.quantidade * this.valorUnitario;
+    }
+
+ 
     exibirDetalhes() {
-        return `Categoria: ${this.categoria} - Descrição: ${this.descricao} - Valor: ${this.valor.toFixed(2)}`;
+
+        return `Categoria: ${this.categoria} - Produto: ${this.produto} - Quantidade: ${this.quantidade} - Valor Unitário: ${formatarMoeda(this.valorUnitario)} - Valor Total: ${formatarMoeda(this.calcularValorTotal())}`;
     }
 }
 
 class GastoAlimentacao extends Gasto {
-    constructor(descricao, valor) {
-        super('Alimentação', descricao, valor);
+    constructor(produto, quantidade, valorUnitario) {
+
+        super('Alimentação', produto, quantidade, valorUnitario);
     }
 }
 
 class GastoTransporte extends Gasto {
-    constructor(descricao, valor) {
-        super('Transporte', descricao, valor);
+    constructor(produto, quantidade, valorUnitario) {
+
+        super('Transporte', produto, quantidade, valorUnitario);
     }
 }
+
+
+class GastoLivros extends Gasto {
+    constructor(produto, quantidade, valorUnitario) {
+
+        super('livro', produto, quantidade, valorUnitario);
+    }
+}
+
 
 let gastos = [];
 
 function adicionarGasto() {
-    const categoria = document.getElementById('categoria').value;
-    const descricao = document.getElementById('descricao').value;
-    const valor = parseFloat(document.getElementById('valor').value);
 
-    if (categoria && descricao && !isNaN(valor)) {
+    const categoria = document.getElementById('categoria').value;
+    const produto = document.getElementById('produto').value;
+    const quantidade = parseFloat(document.getElementById('quantidade').value);
+    const valorUnitario = parseFloat(document.getElementById('valorUnitario').value);
+
+   
+    if (categoria && produto && !isNaN(quantidade) && !isNaN(valorUnitario)) {
+      
         switch (categoria.toLowerCase()) {
             case 'alimentação':
-                gastos.push(new GastoAlimentacao(descricao, valor));
+                gastos.push(new GastoAlimentacao(produto, quantidade, valorUnitario));
                 break;
             case 'transporte':
-                gastos.push(new GastoTransporte(descricao, valor));
+                gastos.push(new GastoTransporte(produto, quantidade, valorUnitario));
                 break;
+            case 'livro':
+                    gastos.push(new GastoLivros(produto, quantidade, valorUnitario));
+                    break;
             default:
-                gastos.push(new Gasto(categoria, descricao, valor));
+                gastos.push(new Gasto(categoria, produto, quantidade, valorUnitario));
                 break;
         }
         listarGastos();
@@ -47,36 +74,39 @@ function adicionarGasto() {
     }
 }
 
+
 function apagarGasto(index) {
+
     gastos.splice(index, 1);
     listarGastos();
 }
 
 function editarGasto(index) {
-    const novoDescricao = prompt("Digite a nova descrição:", gastos[index].descricao);
-    const novoValor = parseFloat(prompt("Digite o novo valor:", gastos[index].valor));
+    const novoProduto = prompt("Digite o novo produto:", gastos[index].produto);
+    const novaQuantidade = parseFloat(prompt("Digite a nova quantidade:", gastos[index].quantidade));
+    const novoValorUnitario = parseFloat(prompt("Digite o novo valor unitário:", gastos[index].valorUnitario));
 
-    if (novoDescricao !== null && !isNaN(novoValor)) {
-        gastos[index].descricao = novoDescricao;
-        gastos[index].valor = novoValor;
+    if (novoProduto !== null && !isNaN(novaQuantidade) && !isNaN(novoValorUnitario)) {
+        gastos[index].produto = novoProduto;
+        gastos[index].quantidade = novaQuantidade;
+        gastos[index].valorUnitario = novoValorUnitario;
         listarGastos();
     }
 }
 
 function buscarGastos() {
     const termoBusca = document.getElementById('buscar').value.toLowerCase();
-    const gastosFiltrados = gastos.filter(gasto => gasto.categoria.toLowerCase().includes(termoBusca));
+    const gastosFiltrados = gastos.filter(gasto => gasto.categoria.toLowerCase().includes(termoBusca) || gasto.produto.toLowerCase().includes(termoBusca));
     listarGastos(gastosFiltrados);
 }
 
 function listarGastos(lista = gastos) {
     const gastosList = document.getElementById('gastos-list');
     gastosList.innerHTML = '';
-    
     lista.forEach((gasto, index) => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-            ${gasto.exibirDetalhes()} - Valor: ${formatarMoeda(gasto.valor)}
+            ${gasto.exibirDetalhes()} <!-- Aqui está a exibição dos detalhes do gasto -->
             <button onclick="editarGasto(${index})">Editar</button>
             <button onclick="apagarGasto(${index})">Apagar</button>
         `;
