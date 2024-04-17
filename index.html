@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos com Estudo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="form-container">
+        <h1>Controle de Gastos com Estudo</h1>
+        <h2>Adicionar Gasto</h2>
+        <label for="categoria">Categoria:</label>
+        <select id="categoria">
+            <option value="Alimentação">Alimentação</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Livro">Livro</option>
+            <option value="Outros">Outros</option>
+        </select>
+        <label for="produto">Produto:</label>
+        <input type="text" id="produto">
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade">
+        <label for="valorUnitario">Valor Unitário:</label>
+        <input type="number" id="valorUnitario">
+        <button onclick="adicionarGasto()">Adicionar</button>
+    </div>
+
+    <div id="filtro-container">
+        <label for="buscar">Buscar:</label>
+        <input type="text" id="buscar" oninput="buscarGastos()">
+    </div>
+
+    <ul id="gastos-list">
+    </ul>
+
+    <script src="main.js"></script>
+</body>
+</html>
